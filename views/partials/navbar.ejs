@@ -1,0 +1,35 @@
+<!-- Навігаційна панель -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">SocialNet</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+            </ul>
+            <!-- Форма пошуку -->
+            <form class="d-flex" role="search" action="/search" method="get">
+                <input class="form-control me-2" type="search" name="query" placeholder="Шукати користувача..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Шукати</button>
+            </form>
+            <ul class="navbar-nav ms-3">
+                <% if (user_n) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile/<%= user_n.id %>">Профіль</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Вийти</a>
+                    </li>
+                <% } else { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Увійти</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Зареєструватися</a>
+                    </li>
+                <% } %>
+            </ul>            
+        </div>
+    </div>
+</nav>

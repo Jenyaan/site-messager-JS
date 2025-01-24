@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Створити пост</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Створити пост</h1>
+
+        <form action="/create/post/<%= userId %>" method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">Заголовок</label>
+                <input type="text" id="title" name="title" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="content" class="form-label">Вміст</label>
+                <textarea id="content" name="content" class="form-control" rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Створити пост</button>
+        </form>
+    </div>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

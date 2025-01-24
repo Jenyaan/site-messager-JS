@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лента</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    <%- include('partials/navbar') %>
+
+    <div class="container mt-4">
+        <section id="feed" class="my-5">
+            <h2>Лента постів</h2>
+
+            <!-- Цикл для вывода постов -->
+            <% posts.forEach(post => { %>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <img src="<%= post.image %>" alt="Аватар" class="rounded-circle me-3" width="40" height="40">
+                            <a href="/profile/<%= post.author_id %>" class="card-title" style="text-decoration: none;">
+                                <%= post.name %> <!-- Имя автора -->
+                            </a>
+                        </div>
+                        <h5 class="card-title"><%= post.title %></h5> <!-- Заголовок поста -->
+                        <p class="card-text"><%= post.body %></p> <!-- Текст поста -->
+                        
+
+                        <!-- Выводим комментарии для каждого поста -->
+                        <% if (post.comments && post.comments.length > 0) { %>
+                            <div class="mt-3">
+                                <details>
+                                    <summary>Коментарі (<%= post.comments.length %>)</summary>
+                                    <% post.comments.forEach(comment => { %>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <img src="<%= comment.image %>"  class="rounded-circle me-2" width="30" height="30">
+                                            <div>
+                                                <strong><%= comment.name %>:</strong>
+                                                <p class="mb-0"><%= comment.comment %></p>
+                                            </div>
+                                        </div>
+                                    <% }); %>
+                                </details>
+                            </div>
+                        <% } else { %>
+                            <p>Коментарів немає.</p>
+                        <% } %>
+                        
+                        
+                    </div>
+                </div>
+            <% }); %>
+
+        </section>
+    </div>
+
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

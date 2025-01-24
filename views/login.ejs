@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вхiд</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="/" class="btn btn-link p-0 d-flex align-items-center" style="color: black; text-decoration: none;">
+                            ➢ На головну
+                        </a>    
+                        <h2 class="text-center mb-4">Вхід</h2>
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Введіть email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Пароль</label>
+                                <input type="password" class="form-control" id="password" placeholder="Введіть пароль" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Увійти</button>
+                            </div>
+                            <p class="text-center mt-3">Немає акаунта? <a href="/register">Зареєструватися</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!email || !password) {
+            alert('Будь ласка, заповніть усі поля.');
+            return;
+        }
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert(result.message);
+                window.location.href = '/profile/' + result.id; // Избегаем вложенного шаблонного литерала
+            } else {
+                alert(result.error);
+            }
+        } catch (error) {
+            alert('Неможливо з’єднатися із сервером. Спробуйте пізніше.');
+        }
+    });
+});
+    </script>
+
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
